@@ -3,16 +3,14 @@ import { Home, Wallet, List, BadgeDollarSign, Users, Bike, Shirt, Hammer, Beef, 
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
-    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
-import { ModeToggle } from "./toggle"
+
 
 // Menu items.
 const users = [

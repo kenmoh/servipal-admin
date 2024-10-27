@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { ModeToggle } from './toggle'
-import { Bell, LogIn, User } from 'lucide-react'
+import { Bell, User } from 'lucide-react'
 import Link from 'next/link'
 
 const Navbar = () => {

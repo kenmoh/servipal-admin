@@ -29,11 +29,9 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronDown, X } from "lucide-react";
 import { UserType } from "@/types/user-types";
 import Label from "./Label";
-import { ModeToggle } from "./toggle";
 import { Switch } from "./ui/switch";
 
 

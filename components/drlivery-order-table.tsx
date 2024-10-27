@@ -30,7 +30,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { DeliveryOrderType } from "@/types/order-types";
 
@@ -99,6 +99,7 @@ export default function DeliveryOrderTable({
         null
     );
 
+    console.log(selectedOrder)
 
     const [globalFilter, setGlobalFilter] = useState("");
 

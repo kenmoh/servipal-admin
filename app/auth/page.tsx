@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/lib/login";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 
 
@@ -46,13 +46,11 @@ export default function AuthPage() {
     })
 
 
-    const { mutate, data, isPending } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: (loginData: LoginFormData) => loginUser(loginData.username, loginData.password),
-        onSuccess: (data) => { router.push('/dashboard'), console.log(data, '===================') },
+        onSuccess: () => router.push('/dashboard'),
         onError: (error: Error) => console.log(error.message)
     })
-
-    console.log('====================', data)
 
 
 
