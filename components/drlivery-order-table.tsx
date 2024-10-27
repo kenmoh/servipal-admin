@@ -62,7 +62,7 @@ export default function DeliveryOrderTable({
                             : row.getValue("order_status") === "in transit"
                                 ? "bg-orange-200 text-orange-600"
                                 : "bg-purple-200 text-purple-600"
-                        } flex justify-center p-2 rounded-full capitalize w-2/3`}
+                        } flex justify-center py-1 px-5 rounded-full capitalize w-2/3`}
                 >
                     {row.getValue("order_status")}
                 </div>
