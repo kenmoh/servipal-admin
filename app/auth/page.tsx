@@ -24,7 +24,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const registerSchema = loginSchema.extend({
     name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-    userType: z.enum(["customer", "vendor"], { required_error: "Please select a user type" }),
+    userType: z.enum(["Restaurant Service Provide", "Laundry Service Provider"], { required_error: "Please select a user role" }),
     confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -86,7 +86,7 @@ export default function AuthPage() {
                                 <TabsTrigger value="register">Register</TabsTrigger>
                             </TabsList>
                             <TabsContent value="login">
-                                <form onSubmit={loginForm.handleSubmit(mutate)}>
+                                <form onSubmit={loginForm.handleSubmit((data) => mutate(data))}>
                                     <div className="grid w-full items-center gap-4">
                                         <div className="flex flex-col space-y-1.5">
                                             <Label htmlFor="login-email">Email</Label>
@@ -119,7 +119,7 @@ export default function AuthPage() {
                                 </form>
                             </TabsContent>
                             <TabsContent value="register">
-                                <form onSubmit={registerForm.handleSubmit(mutate)}>
+                                <form onSubmit={registerForm.handleSubmit((data) => console.log(data))}>
                                     <div className="grid w-full items-center gap-4">
                                         <div className="flex flex-col space-y-1.5">
                                             <Label htmlFor="register-name">Username</Label>
@@ -144,11 +144,11 @@ export default function AuthPage() {
                                                 <p className="text-sm text-red-500">{registerForm.formState.errors.email.message}</p>
                                             )}
                                         </div>
-                                        <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="register-user-type">User Type</Label>
-                                            <Select onValueChange={(value) => registerForm.setValue("userType", value)}>
+                                        {/* <div className="flex flex-col space-y-1.5">
+                                            <Label htmlFor="register-user-type">Role</Label>
+                                            <Select onValueChange={(value: string) => registerForm.setValue("userType", value)}>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select user type" />
+                                                    <SelectValue placeholder="Select Role" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="customer">Restaurant Service Provide</SelectItem>
@@ -158,7 +158,7 @@ export default function AuthPage() {
                                             {registerForm.formState.errors.userType && (
                                                 <p className="text-sm text-red-500">{registerForm.formState.errors.userType.message}</p>
                                             )}
-                                        </div>
+                                        </div> */}
                                         <div className="flex flex-col space-y-1.5">
                                             <Label htmlFor="register-password">Password</Label>
                                             <Input
