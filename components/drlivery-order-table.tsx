@@ -99,8 +99,6 @@ export default function DeliveryOrderTable({
         null
     );
 
-    console.log(selectedOrder)
-
     const [globalFilter, setGlobalFilter] = useState("");
 
     const table = useReactTable({
