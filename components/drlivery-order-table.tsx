@@ -37,9 +37,9 @@ import { DeliveryOrderType } from "@/types/order-types";
 export default function DeliveryOrderTable({
     orders,
 }: {
-    orders: DeliveryOrderType;
+    orders: DeliveryOrderType[];
 }) {
-    const columns: ColumnDef<typeof orders>[] = [
+    const columns: ColumnDef<DeliveryOrderType>[] = [
         {
             accessorKey: "order_number",
             header: "#",
@@ -95,14 +95,12 @@ export default function DeliveryOrderTable({
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = useState({});
-    const [selectedOrder, setSelectedOrder] = useState<typeof orders | null>(
-        null
-    );
+    const [selectedOrder, setSelectedOrder] = useState<DeliveryOrderType | null>(null);
 
     const [globalFilter, setGlobalFilter] = useState("");
 
     const table = useReactTable({
-        data: orders,
+        data: orders as DeliveryOrderType[],
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
