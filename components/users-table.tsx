@@ -36,8 +36,8 @@ import { Switch } from "./ui/switch";
 
 
 
-export default function UsersTable({ users }: { users: UserType }) {
-    const columns: ColumnDef<typeof users>[] = [
+export default function UsersTable({ users }: { users: UserType[] }) {
+    const columns: ColumnDef<UserType>[] = [
         // {
         //     id: "select",
         //     header: ({ table }) => (
@@ -105,7 +105,7 @@ export default function UsersTable({ users }: { users: UserType }) {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = useState({});
-    const [selectedUser, setSelectedUser] = useState<typeof users | null>(null);
+    const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
     const [globalFilter, setGlobalFilter] = useState("");
 
     const table = useReactTable({
