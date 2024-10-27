@@ -46,16 +46,11 @@ export default function AuthPage() {
     })
 
 
-    const { mutate, isPending } = useMutation({
+    const { mutate } = useMutation({
         mutationFn: (loginData: LoginFormData) => loginUser(loginData.username, loginData.password),
         onSuccess: () => router.push('/dashboard'),
         onError: (error: Error) => console.log(error.message)
     })
-
-
-
-    { isPending && <div className="flex items-center justify-center text-8xl text-red-500">Pending...</div> }
-
 
 
     return (
