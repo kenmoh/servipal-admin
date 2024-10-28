@@ -4,6 +4,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("access_token")?.value;
   const t = request.cookies.get("access_token");
+  const x = request.cookies.has("access_token");
 
   // Add debug logging
   console.log("Middleware executing for path:", pathname);
@@ -13,7 +14,7 @@ export function middleware(request: NextRequest) {
   // Use edge runtime compatible logging
   console.log(`[Middleware] Path: ${pathname}`);
   console.log(`[Middleware] Has token: ${!!token}`);
-  console.log(`[Middleware] Token: ${t}`);
+  console.log(`[Middleware] Token: ${t} ============= ${x}`);
   console.log(`[Middleware] Has t ${!!t} ===============`);
 
   // Redirect authenticated users away from the auth pages

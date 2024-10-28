@@ -42,6 +42,10 @@ export const authApi = {
     if (response.status !== 200) {
       throw new Error(response.data?.detail.split(":")[0] || "Login failed");
     }
+    console.log("Response headers:", response.headers);
+    console.log("Set-Cookie header:", response.headers["set-cookie"]);
+    console.log("Set-Cookie header:", response.headers["Set-Cookie"]);
+
     return response.data;
   },
 
