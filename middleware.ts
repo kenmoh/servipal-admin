@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("access_token")?.value;
+  const t = request.cookies.get("access_token");
 
   // Add debug logging
   console.log("Middleware executing for path:", pathname);
@@ -12,6 +13,7 @@ export function middleware(request: NextRequest) {
   // Use edge runtime compatible logging
   console.log(`[Middleware] Path: ${pathname}`);
   console.log(`[Middleware] Has token: ${!!token}`);
+  console.log(`[Middleware] Has token: ${!!t} ===============`);
 
   // Redirect authenticated users away from the auth pages
   if (pathname.startsWith("/auth") && token) {
