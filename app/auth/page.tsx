@@ -38,8 +38,6 @@ const registerSchema = loginSchema.extend({
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState("login")
     const router = useRouter()
-    const currentUser = authApi.getCurrentUser()
-
 
 
     const loginForm = useForm({
