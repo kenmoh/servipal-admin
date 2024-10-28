@@ -13,7 +13,8 @@ export function middleware(request: NextRequest) {
   // Use edge runtime compatible logging
   console.log(`[Middleware] Path: ${pathname}`);
   console.log(`[Middleware] Has token: ${!!token}`);
-  console.log(`[Middleware] Has token: ${!!t} ===============`);
+  console.log(`[Middleware] Token: ${t}`);
+  console.log(`[Middleware] Has t ${!!t} ===============`);
 
   // Redirect authenticated users away from the auth pages
   if (pathname.startsWith("/auth") && token) {
