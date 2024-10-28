@@ -38,8 +38,8 @@ const registerSchema = loginSchema.extend({
 
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState("login")
-    const router = useRouter();
     const { user, setUser } = useAuth()
+    const router = useRouter();
 
     console.log(user)
     const loginForm = useForm({
@@ -58,6 +58,7 @@ export default function AuthPage() {
         onSuccess: () => {
             if (data?.access_token) {
                 setUser(jwtDecode(data?.access_token))
+                router.push('/dashboard')
             }
         },
         onError: (error: Error) => console.log(error.message)
