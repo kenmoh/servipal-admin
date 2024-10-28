@@ -59,7 +59,6 @@ export const authApi = {
     if (response.status !== 200) {
       throw new Error(response.data?.detail.split(":")[0]);
     }
-    console.log(response.data, "oooooooooooooooo");
     return response.data;
   },
 

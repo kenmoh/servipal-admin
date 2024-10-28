@@ -57,7 +57,7 @@ export default function AuthPage() {
         mutationFn: (loginData: LoginFormData) => authApi.login(loginData),
         onSuccess: () => {
             if (data?.access_token) {
-                router.push('/dashboard'), setUser(jwtDecode(data?.access_token))
+                setUser(jwtDecode(data?.access_token))
             }
         },
         onError: (error: Error) => console.log(error.message)
