@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useUser } from '@/components/auth-provider';
@@ -10,10 +11,10 @@ export function useAuth() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const checkAuth = () => {
+        const checkAuth = async () => {
             const token = sessionStorage.getItem('auth_token');
             const isAuth = !!token;
-            setIsAuthenticated(!!token);
+            setIsAuthenticated(isAuth);
 
             if (isAuth && !user) {
                 // If we have a token but no user, try to decode the token
@@ -24,8 +25,18 @@ export function useAuth() {
                     // Invalid token
                     sessionStorage.removeItem('auth_token');
                     setIsAuthenticated(false);
+                    await router.push('/auth');
+                    return;
                 }
             }
+
+            if (isAuth && user) {
+                router.push('/dashboard')
+
+            }
+
+            console.log(user, 'USER')
+
             setIsLoading(false);
 
             if (!token && !router.pathname.startsWith('/auth')) {

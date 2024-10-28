@@ -12,12 +12,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from 'jwt-decode'
 // import { loginUser } from "@/lib/login";
 import { LoaderCircle } from "lucide-react";
 import { authApi } from "@/lib/login";
 import { AuthResponse } from "../../lib/login";
-import { useUser } from "@/components/auth-provider";
+;
 
 
 
@@ -38,7 +37,8 @@ const registerSchema = loginSchema.extend({
 
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState("login")
-    const { user } = useUser()
+    const router = useRouter()
+    const currentUser = authApi.getCurrentUser()
 
 
 
@@ -55,7 +55,7 @@ export default function AuthPage() {
 
     const { mutate, isPending, data }: UseMutationResult<AuthResponse, Error, LoginFormData> = useMutation({
         mutationFn: (loginData: LoginFormData) => authApi.login(loginData),
-        onSuccess: () => console.log(`Welcome ${user?.email}`),
+        onSuccess: () => router.push('/dashboard'),
         onError: (error: Error) => console.log(error.message)
     })
 
