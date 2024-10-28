@@ -55,11 +55,23 @@ export default function AuthPage() {
 
     const { mutate, isPending, data }: UseMutationResult<AuthResponse, Error, LoginFormData> = useMutation({
         mutationFn: (loginData: LoginFormData) => authApi.login(loginData),
-        onSuccess: () => {
+        onSuccess: async () => {
             if (data?.access_token) {
                 setUser(jwtDecode(data?.access_token))
                 // Force a hard redirect to dashboard
-                window.location.href = '/dashboard';
+                // window.location.href = '/dashboard';
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                // Try these approaches one at a time to see which works:
+
+                // Approach 1: Force reload current page first, then redirect
+                window.location.reload();
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 100);
+
+                // OR Approach 2: Force reload with the new URL
+                // window.location.replace('/dashboard');
             }
         },
         onError: (error: Error) => console.log(error.message)
