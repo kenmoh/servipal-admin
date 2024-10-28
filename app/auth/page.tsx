@@ -58,26 +58,17 @@ export default function AuthPage() {
         onSuccess: async () => {
             if (data?.access_token) {
                 setUser(jwtDecode(data?.access_token))
-                // Force a hard redirect to dashboard
-                // window.location.href = '/dashboard';
-                await new Promise(resolve => setTimeout(resolve, 100));
+                router.replace('/dashboard')
 
-                // Try these approaches one at a time to see which works:
 
-                // Approach 1: Force reload current page first, then redirect
-                window.location.reload();
-                setTimeout(() => {
-                    window.location.href = '/dashboard';
-                }, 100);
-
-                // OR Approach 2: Force reload with the new URL
-                // window.location.replace('/dashboard');
             }
         },
         onError: (error: Error) => console.log(error.message)
     })
 
-    console.log(user)
+    console.log(jwtDecode(data ? data?.access_token : ''))
+    console.log(data)
+    console.log(data?.access_token)
 
     return (
         <div className="grid md:grid-cols-2  grid-cols-1 relative">
