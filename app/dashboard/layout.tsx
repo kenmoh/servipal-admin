@@ -7,14 +7,7 @@ import { redirect } from "next/navigation";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    const { isAuthenticated, isLoading } = useAuth()
 
-    if (isLoading) {
-        <div>Loading...</div>
-    }
-    if (!isAuthenticated) {
-        redirect('/auth')
-    }
     return (
 
         <div style={{ display: 'flex', minHeight: '100vh' }}>
