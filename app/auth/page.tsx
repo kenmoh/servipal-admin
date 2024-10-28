@@ -10,9 +10,14 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { loginUser } from "@/lib/login";
-import { useMutation } from "@tanstack/react-query";
+import { jwtDecode } from 'jwt-decode'
+// import { loginUser } from "@/lib/login";
+import { LoaderCircle } from "lucide-react";
+import { useAuth } from "@/context/authcontext";
+import { authApi } from "@/lib/login";
+import { AuthResponse } from "../../lib/login";
 
 
 
@@ -34,7 +39,9 @@ const registerSchema = loginSchema.extend({
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState("login")
     const router = useRouter();
+    const { user, setUser } = useAuth()
 
+    console.log(user)
     const loginForm = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: { username: "", password: "" },
@@ -46,12 +53,17 @@ export default function AuthPage() {
     })
 
 
-    const { mutate } = useMutation({
-        mutationFn: (loginData: LoginFormData) => loginUser(loginData.username, loginData.password),
-        onSuccess: () => router.push('/dashboard'),
+    const { mutate, isPending, data }: UseMutationResult<AuthResponse, Error, LoginFormData> = useMutation({
+        mutationFn: (loginData: LoginFormData) => authApi.login(loginData),
+        onSuccess: () => {
+            if (data?.access_token) {
+                router.push('/dashboard'), setUser(jwtDecode(data?.access_token))
+            }
+        },
         onError: (error: Error) => console.log(error.message)
     })
 
+    console.log(user)
 
     return (
         <div className="grid md:grid-cols-2  grid-cols-1 relative">
@@ -113,8 +125,8 @@ export default function AuthPage() {
                                             )}
                                         </div>
                                     </div>
-                                    <Button type="submit" className="w-full mt-4  text-white bg-orange-600 text-md uppercase font-semibold hover:bg-orange-500">
-                                        Login
+                                    <Button disabled={isPending} type="submit" className="w-full mt-4  text-white bg-orange-600 text-md uppercase font-semibold hover:bg-orange-500">
+                                        {isPending ? <LoaderCircle size={20} /> : 'Login'}
                                     </Button>
                                 </form>
                             </TabsContent>

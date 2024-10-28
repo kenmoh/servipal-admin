@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import PageTransition from "@/components/page-transition";
+import AuthProvider from "@/components/auth-provider";
 
 
 
@@ -42,8 +43,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <PageTransition>
-
-            {children}
+            <AuthProvider>
+              {children}
+            </AuthProvider>
           </PageTransition>
         </ThemeProvider>
 
