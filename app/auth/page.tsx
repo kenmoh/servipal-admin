@@ -15,9 +15,9 @@ import { useRouter } from "next/navigation";
 import { jwtDecode } from 'jwt-decode'
 // import { loginUser } from "@/lib/login";
 import { LoaderCircle } from "lucide-react";
-import { useAuth } from "@/context/authcontext";
 import { authApi } from "@/lib/login";
 import { AuthResponse } from "../../lib/login";
+import { useUser } from "@/components/auth-provider";
 
 
 
@@ -38,8 +38,8 @@ const registerSchema = loginSchema.extend({
 
 export default function AuthPage() {
     const [activeTab, setActiveTab] = useState("login")
-    const { user, setUser } = useAuth()
-    const router = useRouter();
+    const { user } = useUser()
+
 
 
     const loginForm = useForm({
@@ -55,21 +55,10 @@ export default function AuthPage() {
 
     const { mutate, isPending, data }: UseMutationResult<AuthResponse, Error, LoginFormData> = useMutation({
         mutationFn: (loginData: LoginFormData) => authApi.login(loginData),
-        onSuccess: async () => {
-            if (data?.access_token) {
-                setUser(jwtDecode(data?.access_token))
-                console.log(user, 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', jwtDecode(data?.access_token))
-                router.replace('/dashboard')
-
-
-            }
-        },
+        onSuccess: () => console.log(`Welcome ${user?.email}`),
         onError: (error: Error) => console.log(error.message)
     })
 
-
-    console.log(data, 'DATA =====================================')
-    console.log(data?.access_token, 'DECODED ===========================')
 
     return (
         <div className="grid md:grid-cols-2  grid-cols-1 relative">

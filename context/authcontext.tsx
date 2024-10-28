@@ -16,6 +16,6 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 // This hook is used to access the user info.
-export function useAuth() {
-    return useContext(AuthContext);
-}
+// export function useAuth() {
+//     return useContext(AuthContext);
+// }
