@@ -58,7 +58,7 @@ export default function AuthPage() {
         onSuccess: async () => {
             if (data?.access_token) {
                 setUser(jwtDecode(data?.access_token))
-                console.log(user, 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb')
+                console.log(user, 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', jwtDecode(data?.access_token))
                 router.replace('/dashboard')
 
 
@@ -70,7 +70,6 @@ export default function AuthPage() {
 
     console.log(data, 'DATA =====================================')
     console.log(data?.access_token, 'DECODED ===========================')
-    console.log(jwtDecode(data?.access_token!), 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 
     return (
         <div className="grid md:grid-cols-2  grid-cols-1 relative">
