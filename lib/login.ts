@@ -65,9 +65,4 @@ export const authApi = {
   logout: async () => {
     return api.post("/api/admin-logout");
   },
-
-  getUser: async (): Promise<UserType> => {
-    const { data } = await api.get("/auth/validate");
-    return data.user;
-  },
 };
