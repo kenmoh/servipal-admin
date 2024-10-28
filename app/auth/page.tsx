@@ -58,7 +58,8 @@ export default function AuthPage() {
         onSuccess: () => {
             if (data?.access_token) {
                 setUser(jwtDecode(data?.access_token))
-                router.push('/dashboard')
+                // Force a hard redirect to dashboard
+                window.location.href = '/dashboard';
             }
         },
         onError: (error: Error) => console.log(error.message)

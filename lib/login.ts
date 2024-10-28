@@ -54,10 +54,11 @@ export const authApi = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+        withCredentials: true,
       }
     );
     if (response.status !== 200) {
-      throw new Error(response.data?.detail.split(":")[0]);
+      throw new Error(response.data?.detail.split(":")[0] || "Login failed");
     }
     return response.data;
   },

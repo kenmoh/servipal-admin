@@ -22,5 +22,6 @@ export const config = {
   matcher: [
     // Add routes that need protection
     "/dashboard/:path*",
+    "/auth/:path*",
   ],
 };
