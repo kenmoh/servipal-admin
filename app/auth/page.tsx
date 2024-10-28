@@ -41,7 +41,7 @@ export default function AuthPage() {
     const { user, setUser } = useAuth()
     const router = useRouter();
 
-    console.log(user)
+
     const loginForm = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: { username: "", password: "" },
@@ -66,9 +66,10 @@ export default function AuthPage() {
         onError: (error: Error) => console.log(error.message)
     })
 
-    console.log(jwtDecode(data ? data?.access_token : ''), '=========================')
+
     console.log(data, 'DATA =====================================')
     console.log(data?.access_token, 'DECODED ===========================')
+    console.log(user)
 
     return (
         <div className="grid md:grid-cols-2  grid-cols-1 relative">
