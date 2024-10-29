@@ -49,25 +49,4 @@ export const authApi = {
   logout: async () => {
     return api.post("/api/admin-logout");
   },
-  // getCurrentUser: (): UserType | null => {
-  //   const token = tokenStorage.getToken();
-  //   if (token) {
-  //     try {
-  //       return jwtDecode<UserType>(token);
-  //     } catch (error) {
-  //       console.error("Failed to decode token:", error);
-  //       return null;
-  //     }
-  //   }
-  //   return null;
-  // },
 };
-
-// // Interceptor to add the token to all requests
-// api.interceptors.request.use((config) => {
-//   const token = tokenStorage.getToken();
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// });
